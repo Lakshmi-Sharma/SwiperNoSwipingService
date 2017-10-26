@@ -20,18 +20,42 @@ router.get('/', function(req, res) {
 router.get('/date', function(req, res) {
 	var date = new Date();
 	var year = date.getFullYear();
-	var month = date.getMonth();
+	var month = date.getMonth() + 1;
 	var day = date.getDate();
-	var hour = date.getHours();
-	var str = "Time now is " + year + month + day + hour;
+	var hours = date.getHours() + 1;
+	var minutes = date.getMinutes() + 1;
+	var seconds = date.getSeconds() + 1;
+	var str = "" + hours + ":" + minutes + ":" + seconds + " " + 
+		month + "/" + day + " " + year;
+
 	res.json({ 
+		Date: str,
 		year: year,
 		month: month,
 		day: day,
-		hour: hour,
+		hours: hours,
+		minutes: minutes,
+		seconds: seconds
 		});
 });
 
+
+// Set up CORS
+
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+app.use(allowCrossDomain);
 app.use('/api', router);
 
 app.listen(port, function() {
