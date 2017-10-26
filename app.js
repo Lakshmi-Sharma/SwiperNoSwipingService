@@ -34,6 +34,6 @@ router.get('/date', function(req, res) {
 
 app.use('/api', router);
 
-app.listen(3000, function(){
-	console.log('running');
+app.listen(port, function() {
+  console.log('Node app is running on port' + port);
 });
