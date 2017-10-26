@@ -7,6 +7,8 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 3000;
 
+app.set('port', (port));
+
 //ROUTES FOR API
 
 var router = express.Router();
